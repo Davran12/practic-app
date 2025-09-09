@@ -1,0 +1,451 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Circular", -apple-system, BlinkMacSystemFont, Roboto,
+    Helvetica Neue, sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+
+  h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #ff5a5f;
+  }
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #717171;
+}
+
+.sectionDivider {
+  height: 1px;
+  background-color: #ebebeb;
+  margin: 40px 0;
+}
+
+// Стили для секции эксклюзивов
+.exclusivesSection {
+  margin-bottom: 40px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #484848;
+  }
+}
+
+.exclusivesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.exclusiveCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Стили для популярной секции
+.popularSection {
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #484848;
+  }
+}
+
+.popularHeader {
+  margin-bottom: 20px;
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #484848;
+  }
+}
+
+.popularGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.popularCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Общие стили для карточек
+.cardImage {
+  height: 200px;
+  overflow: hidden;
+
+  .popularCard & {
+    height: 150px;
+  }
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, #e5e5e5 25%, #f0f0f0 50%, #e5e5e5 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.cardContent {
+  padding: 16px;
+
+  .popularCard & {
+    padding: 12px;
+  }
+}
+
+.cardContent h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  color: #484848;
+}
+
+.cardContent h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.3;
+  color: #484848;
+}
+
+.location {
+  color: #717171;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.priceRating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-weight: 600;
+  color: #484848;
+  font-size: 14px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  color: #484848;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+// Адаптивность
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .exclusivesGrid,
+  .popularGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .header h1 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .exclusivesGrid,
+  .popularGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+}
+// Фильтры
+.filters {
+  margin-bottom: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #484848;
+  }
+}
+
+.filterGroup {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filterInput,
+.filterSelect {
+  padding: 10px 15px;
+  border: 2px solid #e4e4e4;
+  border-radius: 8px;
+  font-size: 14px;
+  min-width: 120px;
+
+  &:focus {
+    outline: none;
+    border-color: #008489;
+  }
+}
+
+.filterSelect {
+  background: white;
+  cursor: pointer;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.sectionFilters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+// Информация о результатах
+.resultsInfo {
+  margin-bottom: 15px;
+  color: #717171;
+  font-size: 14px;
+}
+
+// Пагинация
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.paginationButton {
+  padding: 8px 16px;
+  border: 2px solid #e4e4e4;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    border-color: #008489;
+    background: #f7f7f7;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.active {
+    background: #008489;
+    color: white;
+    border-color: #008489;
+  }
+}
+
+// Адаптивность для фильтров и пагинации
+@media (max-width: 768px) {
+  .filterGroup {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filterInput,
+  .filterSelect {
+    width: 100%;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sectionFilters {
+    width: 100%;
+  }
+
+  .pagination {
+    gap: 4px;
+  }
+
+  .paginationButton {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+.realImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+
+  .accommodationCard:hover &,
+  .exclusiveCard:hover &,
+  .card:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.cardImage {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+
+  .popularCard & {
+    height: 150px;
+  }
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, #e5e5e5 25%, #f0f0f0 50%, #e5e5e5 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+.cardImage {
+  position: relative;
+  width: 100%;
+  height: 200px;
+
+  .realImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .imagePlaceholder {
+    width: 100%;
+    height: 100%;
+    background: #f0f0f0;
+    display: none;
+  }
+}
+
+.favoriteButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &.favorited {
+    color: #ff385c;
+  }
+}
+// Добавьте эти стили в конец файла
+.popularSection {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid #eee;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.popularGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.popularCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+.searchInfo {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #666;
+  font-weight: 500;
+  text-align: center;
+}
+
+.noResults {
+  margin-top: 10px;
+  color: #ff385c;
+  font-style: italic;
+  font-size: 14px;
+}

@@ -1,0 +1,158 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Circular", -apple-system, BlinkMacSystemFont, Roboto,
+    Helvetica Neue, sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+
+  h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: #ff5a5f;
+  }
+}
+
+.loading,
+.empty {
+  text-align: center;
+  padding: 60px;
+  font-size: 18px;
+  color: #717171;
+}
+
+.empty {
+  h2 {
+    margin-bottom: 15px;
+    color: #484848;
+  }
+}
+
+.resultsInfo {
+  margin-bottom: 20px;
+  color: #717171;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.favoritesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.favoriteCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+.favoriteCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.cardImage {
+  position: relative;
+  width: 100%;
+  height: 200px;
+
+  .realImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .imagePlaceholder {
+    width: 100%;
+    height: 100%;
+    background: #f0f0f0;
+    display: none;
+  }
+}
+
+.favoriteButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 16px;
+
+  &.favorited {
+    color: #ff385c;
+  }
+}
+
+.cardContent {
+  padding: 16px;
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.location {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 8px 0;
+}
+
+.priceRating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.priceInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.price {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.nights {
+  font-size: 12px;
+  color: #666;
+}
+
+.rating {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.minPrice {
+  font-size: 12px;
+  color: #666;
+}

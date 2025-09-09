@@ -1,0 +1,630 @@
+{
+  "accommodations": [
+    {
+      "id": "1",
+      "title": "Уютная комната в сердце Парижа",
+      "city": "Париж",
+      "type": "Комната",
+      "location": "Париж",
+      "price": 16596,
+      "rating": 4.93,
+      "nights": 2,
+      "isGuestFavorite": true,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "2",
+      "title": "Стильная комната с видом на Эйфелеву башню",
+      "city": "Париж",
+      "type": "Комната",
+      "location": "Париж",
+      "price": 11059,
+      "rating": 4.96,
+      "nights": 2,
+      "isGuestFavorite": true,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "3",
+      "title": "Комфортабельная комната в историческом районе",
+      "city": "Париж",
+      "type": "Комната",
+      "location": "Париж",
+      "price": 14409,
+      "rating": 4.94,
+      "nights": 2,
+      "isGuestFavorite": true,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "4",
+      "title": "Тихая комната в пригороде Парижа",
+      "city": "Париж",
+      "type": "Комната",
+      "location": "Иври-сюр-Сен",
+      "price": 10429,
+      "rating": 4.9,
+      "nights": 2,
+      "isGuestFavorite": true,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "5",
+      "title": "Современное жилье в центре города",
+      "city": "Париж",
+      "type": "Жилье",
+      "location": "Париж",
+      "price": 12279,
+      "rating": 4.85,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "6",
+      "title": "Бюджетное место в общей комнате",
+      "city": "Париж",
+      "type": "Место в комнате",
+      "location": "Париж",
+      "price": 10868,
+      "rating": 5,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "7",
+      "title": "Просторная комната с балконом",
+      "city": "Париж",
+      "type": "Комната",
+      "location": "Париж",
+      "price": 13309,
+      "rating": 4.92,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "8",
+      "title": "Современная квартира в Куала-Лумпуре",
+      "city": "Куала-Лумпур",
+      "type": "Квартира",
+      "location": "Куала-Лумпур",
+      "price": 5360,
+      "rating": 4.91,
+      "nights": 2,
+      "isGuestFavorite": true,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "9",
+      "title": "Кондоминиум с бассейном",
+      "city": "Куала-Лумпур",
+      "type": "Кондоминиум",
+      "location": "Куала-Лумпур",
+      "price": 6079,
+      "rating": 4.82,
+      "nights": 2,
+      "isGuestFavorite": true,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "10",
+      "title": "Уютная комната в малайзийском стиле",
+      "city": "Куала-Лумпур",
+      "type": "Комната",
+      "location": "Куала-Лумпур",
+      "price": 3589,
+      "rating": 4.93,
+      "nights": 2,
+      "isGuestFavorite": true,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "11",
+      "title": "Кондоминиум в деловом районе",
+      "city": "Куала-Лумпур",
+      "type": "Кондоминиium",
+      "location": "Пулапол",
+      "price": 9069,
+      "rating": 4.9,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "12",
+      "title": "Комната в культурном районе Брикфилдс",
+      "city": "Куала-Лумпур",
+      "type": "Комната",
+      "location": "Brickfields",
+      "price": 3939,
+      "rating": 5,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "13",
+      "title": "Кондоминиум у парка Керман",
+      "city": "Куала-Лумпур",
+      "type": "Кондоминиум",
+      "location": "Кампинг-Датук-Керман",
+      "price": 9889,
+      "rating": 4.88,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "14",
+      "title": "Квартира в современном жилом комплексе",
+      "city": "Куала-Лумпур",
+      "type": "Квартира",
+      "location": "Чан Соу Лин",
+      "price": 4529,
+      "rating": 4.83,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "15",
+      "title": "Квартира с видом на Босфор",
+      "city": "Фатих",
+      "type": "Квартира",
+      "location": "Скрекаджи",
+      "price": 5705,
+      "rating": 4.84,
+      "nights": 2,
+      "isGuestFavorite": true,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "16",
+      "title": "Современная квартира в историческом здании",
+      "city": "Фатих",
+      "type": "Квартира",
+      "location": "Скрекаджи",
+      "price": 5504,
+      "rating": 4.87,
+      "nights": 2,
+      "isGuestFavorite": true,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "17",
+      "title": "Апарт-отель с обслуживанием",
+      "city": "Фатих",
+      "type": "Апарт-отель",
+      "location": "Скрекаджи",
+      "price": 3819,
+      "rating": 4.83,
+      "nights": 2,
+      "isGuestFavorite": true,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "18",
+      "title": "Бутик-гостиница в старом городе",
+      "city": "Фатих",
+      "type": "Гостиница",
+      "location": "Скрекаджи",
+      "price": 6699,
+      "rating": 4.94,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "19",
+      "title": "Гостиница с восточным колоритом",
+      "city": "Фатих",
+      "type": "Гостиница",
+      "location": "Скрекаджи",
+      "price": 7539,
+      "rating": 4.83,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "20",
+      "title": "Гостиница в центре Стамбула",
+      "city": "Фатих",
+      "type": "Гостиница",
+      "location": "Стамбул",
+      "price": 6509,
+      "rating": 5,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "21",
+      "title": "Гостевой дом с домашней атмосферой",
+      "city": "Фатих",
+      "type": "Гостевой дом",
+      "location": "Стамбул",
+      "price": 4921,
+      "rating": 4.97,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "22",
+      "title": "Традиционный гостевой дом в Сеуле",
+      "city": "Сеул",
+      "type": "Гостевой дом",
+      "location": "Сеул",
+      "price": 6524,
+      "rating": 5,
+      "nights": 2,
+      "isGuestFavorite": true,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "23",
+      "title": "Комната в фешенебельном районе",
+      "city": "Сеул",
+      "type": "Комната",
+      "location": "Стамбуреон-дон, Часобентин-гу",
+      "price": 10819,
+      "rating": 4.96,
+      "nights": 2,
+      "isGuestFavorite": true,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "24",
+      "title": "Традиционный корейский дом",
+      "city": "Сеул",
+      "type": "Дом",
+      "location": "Сеул",
+      "price": 7503,
+      "rating": 4.75,
+      "nights": 2,
+      "isGuestFavorite": true,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "25",
+      "title": "Дизайнерская гостиница в Сеуле",
+      "city": "Сеул",
+      "type": "Гостиница",
+      "location": "Сеул",
+      "price": 12168,
+      "rating": 5,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "26",
+      "title": "Комната с видом на город",
+      "city": "Сеул",
+      "type": "Комната",
+      "location": "Сеул",
+      "price": 7706,
+      "rating": 4.84,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "27",
+      "title": "Квартира в небоскребе",
+      "city": "Сеул",
+      "type": "Квартира",
+      "location": "Сеул",
+      "price": 12639,
+      "rating": 4.81,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "28",
+      "title": "Уютная комната в студенческом районе",
+      "city": "Сеул",
+      "type": "Комната",
+      "location": "Сеул",
+      "price": 7841,
+      "rating": 5,
+      "nights": 2,
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+      "isFavorite": false
+    }
+  ],
+  "exclusives": [
+    {
+      "id": "1",
+      "title": "Обед с королевой Ленин Нижнего у нее дома",
+      "location": "Рио-де-Жанейро, Бразилия",
+      "price": 85799,
+      "rating": null,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "2",
+      "title": "Создание сезонную кисельку с Ватарам Тору",
+      "location": "Камакура, Япония",
+      "price": 79849,
+      "rating": 5,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "3",
+      "title": "Покорите лед с паралимпийцем Андрея Махри",
+      "location": "Турин, Италия",
+      "price": 24098,
+      "rating": null,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "4",
+      "title": "Фехтование и фото с олимпийцем Эмою Лефортом",
+      "location": "Париж, Франция",
+      "price": 120948,
+      "rating": null,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "5",
+      "title": "Ужин и артишоки в Палаццо Кастильони",
+      "location": "Милан, Италия",
+      "price": 82859,
+      "rating": null,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "6",
+      "title": "Ешьте, пейте и наслаждайтесь с шеф-поваром Томасом Трудура",
+      "location": "Рио-де-Жанейро, Бразилия",
+      "price": 99189,
+      "rating": 5,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "7",
+      "title": "Резьба по мрамору с ветераном и рельефом поколения",
+      "location": "Афины, Греция",
+      "price": 47698,
+      "rating": 5,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    }
+  ],
+  "popular": [
+    {
+      "id": "1",
+      "title": "Рецепты грузинской бабушки",
+      "price": 97179,
+      "rating": 4.97,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "2",
+      "title": "Прогулка по Старому Тбилиси: достопримечательности...",
+      "price": null,
+      "rating": null,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "3",
+      "title": "Раскройте секреты Казбека и Трусо на внедорожнике",
+      "price": 51389,
+      "rating": 4.93,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "4",
+      "title": "Дегустация вин в историческом погребе",
+      "price": 16269,
+      "rating": 4.9,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "5",
+      "title": "Давид-Гареджа и настоящее радужные горы: прогулка на...",
+      "price": 48789,
+      "rating": 4.96,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "6",
+      "title": "Откройте для себя Армению и насладитесь аутентичным обедом",
+      "price": 32849,
+      "rating": 4.93,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "7",
+      "title": "Поход по пабам Тбилиси с Ириной",
+      "price": 107299,
+      "rating": 4.95,
+      "perGroup": true,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    }
+  ],
+  "photography": [
+    {
+      "id": "1",
+      "title": "Стильная фотосессия на ретроавтомобиле",
+      "location": "Рим, Италия",
+      "price": 5718,
+      "rating": 4.89,
+      "perGuest": true,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "2",
+      "title": "Фотосессия в Метрополитен-музее",
+      "location": "Нью-Йорк, Соединенные Штаты",
+      "price": 24399,
+      "rating": 5,
+      "perGuest": true,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "3",
+      "title": "Аэро-фотосъемка от Даниэля",
+      "location": "Форт-Лодердейл, Соединенные Штаты",
+      "price": 20324,
+      "rating": null,
+      "perGroup": true,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "4",
+      "title": "Солнечные фотосессии на Французской Ривьере от Клары",
+      "location": "Канны, Франция",
+      "price": 11427,
+      "rating": 5,
+      "perGuest": true,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "5",
+      "title": "Неаполитанские воспоминания Джованни",
+      "location": "Неаполь, Италия",
+      "price": 4095,
+      "rating": null,
+      "perGuest": true,
+      "minPrice": 7618,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "6",
+      "title": "Аутентичная и инклюзивная фотосъемка от Эшли",
+      "location": "Сент-Пол, Соединенные Штаты",
+      "price": 4065,
+      "rating": null,
+      "perGuest": true,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "7",
+      "title": "Городские портреты в центре города от J.C.",
+      "location": "Мехико, Мексика",
+      "price": 5543,
+      "rating": null,
+      "perGroup": true,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    }
+  ],
+  "chefs": [
+    {
+      "id": "1",
+      "title": "Гиперлокальная еда от Клары",
+      "price": 3584,
+      "rating": 5,
+      "perGuest": true,
+      "minPrice": 8943,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "2",
+      "title": "Веганский ужин: готовит ваш личный повар",
+      "price": 4085,
+      "rating": 5,
+      "perGuest": true,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "3",
+      "title": "Яркие калифорнийско-средиземноморские меню от Лизы",
+      "price": 20568,
+      "rating": null,
+      "perGuest": true,
+      "minPrice": 82273,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "4",
+      "title": "Здоровые вкусы от Фернанды",
+      "price": 7167,
+      "rating": null,
+      "perGuest": true,
+      "minPrice": 34726,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "5",
+      "title": "Познание вкуса от Oscar",
+      "price": 10478,
+      "rating": null,
+      "perGuest": true,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "6",
+      "title": "Каталонская кухня с Кристиной",
+      "price": 3809,
+      "rating": null,
+      "perGuest": true,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    },
+    {
+      "id": "7",
+      "title": "Международный фьюжн для туристов от Брайана",
+      "price": 7317,
+      "rating": null,
+      "perGuest": true,
+      "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=400&h=300&fit=crop",
+      "isFavorite": false
+    }
+  ],
+  "users": [
+    {
+      "id": "5686",
+      "name": "Давран",
+      "lastName": "Осмонов",
+      "age": "20",
+      "phoneNumber": "+996999997727",
+      "email": "davranosmonov06@gmail.com",
+      "password": "davran13254",
+      "role": "admin"
+    }
+  ]
+}

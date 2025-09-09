@@ -1,0 +1,28 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 16px;
+  min-width: 375px;
+  input {
+    padding: 10px;
+    outline: none;
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .saveBtn {
+    padding: 10px;
+    background: rgb(79, 156, 76);
+    color: white;
+    &:hover {
+      background: rgb(95, 186, 92);
+    }
+  }
+}

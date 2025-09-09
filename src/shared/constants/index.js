@@ -1,0 +1,1 @@
+export { productsPerPage } from "./productsPerPage";

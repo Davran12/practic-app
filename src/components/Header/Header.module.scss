@@ -1,0 +1,306 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+
+  &.scrolled {
+    padding: 10px 40px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.logoWrapper img {
+  height: 40px;
+  transition: all 0.3s ease;
+
+  .scrolled & {
+    height: 32px;
+  }
+
+  cursor: pointer;
+}
+
+/* Навигация */
+.nav {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.navLink {
+  font-size: 15px;
+  font-weight: 500;
+  color: #222;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: #000;
+  }
+
+  img {
+    height: 22px;
+  }
+}
+
+.active {
+  border-bottom: 2px solid #000;
+}
+
+.badge {
+  background: #002244;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 12px;
+  margin-left: 6px;
+}
+
+/* --- Большая поисковая строка --- */
+.searchBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 850px;
+  margin: 20px auto;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 40px;
+  padding: 5px 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+
+  &.hidden {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+  }
+}
+
+.searchItem {
+  flex: 1;
+  padding: 0 15px;
+  border-right: 1px solid #eee;
+
+  span {
+    font-size: 11px;
+    font-weight: 600;
+    display: block;
+    color: #222;
+  }
+
+  p {
+    font-size: 13px;
+    color: #777;
+  }
+
+  &:last-child {
+    border-right: none;
+  }
+}
+
+.searchBtn {
+  background: #ff385c;
+  border: none;
+  color: #fff;
+  border-radius: 50%;
+  padding: 12px;
+  cursor: pointer;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: #e63152;
+  }
+}
+
+/* --- Компактная поисковая строка --- */
+.searchCompact {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 40px;
+  padding: 6px 12px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  button {
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+    padding: 0 6px;
+
+    &:hover {
+      color: #000;
+    }
+  }
+  input {
+    border: 1px solid black;
+    border-radius: 15px;
+  }
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  background: #ccc;
+  border-radius: 50%;
+  margin: 0 6px;
+}
+
+.searchIcon {
+  background: #ff385c;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 50%;
+  padding: 6px;
+  margin-left: 8px;
+}
+
+.rightIcons {
+  display: flex;
+  gap: 15px;
+
+  button {
+    background: #f7f7f7;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+      background: #eee;
+    }
+  }
+}
+.header.scrolled .navLink {
+  font-size: 13px;
+}
+
+.header.scrolled .badge {
+  font-size: 8px;
+  padding: 1px 4px;
+}
+
+.header.scrolled .searchCompact button {
+  font-size: 12px;
+  padding: 0 4px;
+}
+
+.header.scrolled .rightIcons button {
+  padding: 6px;
+  font-size: 14px;
+}
+
+// burger menu
+.burgerMenu {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 8px 0;
+  width: 240px;
+  z-index: 1000;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s;
+      &:hover {
+        background: #f7f7f7;
+      }
+    }
+
+    hr {
+      margin: 6px 0;
+      border: none;
+      border-top: 1px solid #eee;
+    }
+  }
+}
+
+.menuIcon {
+  width: 18px;
+  text-align: center;
+}
+
+// В Header.module.scss
+.searchCompact {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 24px;
+  padding: 8px 16px;
+  margin: 0 20px;
+  transition: all 0.3s ease;
+
+  &.visible {
+    display: flex;
+  }
+
+  input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 4px 8px;
+    font-size: 14px;
+
+    &::placeholder {
+      color: #999;
+    }
+  }
+
+  .searchIcon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    font-size: 16px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
