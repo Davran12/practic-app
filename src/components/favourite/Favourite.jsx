@@ -1,28 +1,63 @@
+// components/Favourite/Favourite.jsx
 import React, {useState, useEffect} from "react"
 import styles from "./Favourite.module.scss"
+import {ProductDetail} from "@/components/ProductDetail/ProductDetail" // Импортируем компонент
+import {useNavigate} from "react-router-dom"
 
 const Favourite = () => {
   const [favorites, setFavorites] = useState([])
   const [loading, setLoading] = useState(true)
+  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [selectedProductType, setSelectedProductType] = useState(null)
+  const navigate = useNavigate()
+
+  // Функция для открытия детального просмотра
+  const handleProductClick = (product, type) => {
+    setSelectedProduct(product)
+    setSelectedProductType(type)
+  }
+
+  // Функция для закрытия детального просмотра
+  const handleCloseDetail = () => {
+    setSelectedProduct(null)
+    setSelectedProductType(null)
+  }
+
+  // Функция для переключения избранного из детального просмотра
+  const handleToggleFavoriteFromDetail = async (type, id) => {
+    await toggleFavorite(type, id)
+    // Обновляем выбранный продукт если он открыт
+    if (selectedProduct && selectedProduct.id === id) {
+      const updatedProduct = favorites.find(
+        (item) => item.id === id && item.type === type
+      )
+      setSelectedProduct(updatedProduct)
+    }
+  }
 
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
-        // Добавляем запрос для accommodations
-        const [exclusivesRes, photographyRes, chefsRes, accommodationsRes] =
-          await Promise.all([
-            fetch("http://localhost:3001/exclusives?isFavorite=true"),
-            fetch("http://localhost:3001/photography?isFavorite=true"),
-            fetch("http://localhost:3001/chefs?isFavorite=true"),
-            fetch("http://localhost:3001/accommodations?isFavorite=true"),
-          ])
+        const [
+          exclusivesRes,
+          photographyRes,
+          chefsRes,
+          accommodationsRes,
+          popularRes,
+        ] = await Promise.all([
+          fetch("http://localhost:3001/exclusives?isFavorite=true"),
+          fetch("http://localhost:3001/photography?isFavorite=true"),
+          fetch("http://localhost:3001/chefs?isFavorite=true"),
+          fetch("http://localhost:3001/accommodations?isFavorite=true"),
+          fetch("http://localhost:3001/popular?isFavorite=true"),
+        ])
 
         const exclusives = await exclusivesRes.json()
         const photography = await photographyRes.json()
         const chefs = await chefsRes.json()
         const accommodations = await accommodationsRes.json()
+        const popular = await popularRes.json()
 
-        // Добавляем тип к каждому элементу
         const exclusivesWithType = exclusives.map((item) => ({
           ...item,
           type: "exclusives",
@@ -36,12 +71,17 @@ const Favourite = () => {
           ...item,
           type: "accommodations",
         }))
+        const popularWithType = popular.map((item) => ({
+          ...item,
+          type: "popular",
+        }))
 
         setFavorites([
           ...exclusivesWithType,
           ...photographyWithType,
           ...chefsWithType,
           ...accommodationsWithType,
+          ...popularWithType,
         ])
         setLoading(false)
       } catch (error) {
@@ -83,7 +123,6 @@ const Favourite = () => {
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, " ")}`
 
-    // Для accommodations используем другой формат
     if (perGuest === undefined || perGuest === null) {
       return `${priceText}₽`
     }
@@ -95,6 +134,16 @@ const Favourite = () => {
 
   return (
     <div className={styles.container}>
+      {/* Детальный просмотр */}
+      {selectedProduct && (
+        <ProductDetail
+          product={selectedProduct}
+          type={selectedProductType}
+          onClose={handleCloseDetail}
+          onToggleFavorite={handleToggleFavoriteFromDetail}
+        />
+      )}
+
       <header className={styles.header}>
         <h1>Избранное</h1>
       </header>
@@ -115,6 +164,7 @@ const Favourite = () => {
               <div
                 key={`${item.type}-${item.id}`}
                 className={styles.favoriteCard}
+                onClick={() => handleProductClick(item, item.type)} // Добавляем клик
               >
                 <div className={styles.cardImage}>
                   <img
@@ -129,7 +179,10 @@ const Favourite = () => {
                   <div className={styles.imagePlaceholder}></div>
                   <button
                     className={`${styles.favoriteButton} ${styles.favorited}`}
-                    onClick={() => toggleFavorite(item.type, item.id)}
+                    onClick={(e) => {
+                      e.stopPropagation() // Предотвращаем всплытие клика
+                      toggleFavorite(item.type, item.id)
+                    }}
                   >
                     {item.isFavorite ? "❤️" : "🤍"}
                   </button>
@@ -139,7 +192,7 @@ const Favourite = () => {
                     {item.title || item.type}
                   </h3>
 
-                  {/* Для accommodations показываем другую информацию */}
+                  {/* Для разных типов разное отображение */}
                   {item.type === "accommodations" ? (
                     <>
                       {item.city && (
@@ -160,6 +213,17 @@ const Favourite = () => {
                       {item.rating && (
                         <span className={styles.rating}>★ {item.rating}</span>
                       )}
+                    </>
+                  ) : item.type === "popular" ? (
+                    <>
+                      <div className={styles.priceRating}>
+                        <span className={styles.price}>
+                          {formatPrice(item.price, !item.perGroup)}
+                        </span>
+                        {item.rating && (
+                          <span className={styles.rating}>★ {item.rating}</span>
+                        )}
+                      </div>
                     </>
                   ) : (
                     <>

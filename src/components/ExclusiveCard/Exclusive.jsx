@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from "react"
 import styles from "./Exclusive.module.scss"
 import {useSearch} from "@/context/SearchContext"
+import {ProductDetail} from "@/components/ProductDetail/ProductDetail"
 
 export const Exclusive = () => {
   const [exclusives, setExclusives] = useState([])
   const [popular, setPopular] = useState([])
   const [filteredExclusives, setFilteredExclusives] = useState([])
-  const [filteredPopular, setFilteredPopular] = useState([]) // Добавляем фильтрацию для popular
+  const [filteredPopular, setFilteredPopular] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [currentPopularPage, setCurrentPopularPage] = useState(1)
   const [itemsPerPage] = useState(3)
@@ -18,8 +19,22 @@ export const Exclusive = () => {
     maxPrice: "",
     minRating: "",
   })
+  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [selectedProductType, setSelectedProductType] = useState(null)
 
-  const {searchQuery} = useSearch() // Получаем поисковый запрос
+  const {searchQuery} = useSearch()
+
+  // Функция для открытия детального просмотра
+  const handleProductClick = (product, type = "exclusives") => {
+    setSelectedProduct(product)
+    setSelectedProductType(type)
+  }
+
+  // Функция для закрытия детального просмотра
+  const handleCloseDetail = () => {
+    setSelectedProduct(null)
+    setSelectedProductType(null)
+  }
 
   // Загрузка данных
   useEffect(() => {
@@ -39,7 +54,7 @@ export const Exclusive = () => {
         setExclusives(exclusivesData)
         setFilteredExclusives(exclusivesData)
         setPopular(popularData)
-        setFilteredPopular(popularData) // Инициализируем filteredPopular
+        setFilteredPopular(popularData)
         setLoading(false)
       } catch (error) {
         console.error("Ошибка:", error)
@@ -51,7 +66,7 @@ export const Exclusive = () => {
     fetchData()
   }, [])
 
-  // Переключение избранного
+  // Переключение избранного для exclusives
   const toggleFavorite = async (id) => {
     try {
       const response = await fetch(`http://localhost:3001/exclusives/${id}`)
@@ -78,11 +93,37 @@ export const Exclusive = () => {
     }
   }
 
+  // Переключение избранного для popular
+  const toggleFavoritePopular = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:3001/popular/${id}`)
+      const item = await response.json()
+
+      const updatedItem = {...item, isFavorite: !item.isFavorite}
+
+      await fetch(`http://localhost:3001/popular/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedItem),
+      })
+
+      setPopular((prev) =>
+        prev.map((item) => (item.id === id ? updatedItem : item))
+      )
+      setFilteredPopular((prev) =>
+        prev.map((item) => (item.id === id ? updatedItem : item))
+      )
+    } catch (error) {
+      console.error("Ошибка обновления избранного:", error)
+    }
+  }
+
   // Фильтрация данных exclusives + поиск
   useEffect(() => {
     let result = [...exclusives]
 
-    // Глобальный поиск по exclusives
     if (searchQuery) {
       result = result.filter(
         (item) =>
@@ -93,7 +134,6 @@ export const Exclusive = () => {
       )
     }
 
-    // Обычные фильтры
     if (filters.minPrice) {
       result = result.filter((item) => item.price >= parseInt(filters.minPrice))
     }
@@ -116,7 +156,6 @@ export const Exclusive = () => {
   useEffect(() => {
     let result = [...popular]
 
-    // Глобальный поиск по popular
     if (searchQuery) {
       result = result.filter(
         (item) =>
@@ -174,6 +213,19 @@ export const Exclusive = () => {
 
   return (
     <div className={styles.container}>
+      {selectedProduct && (
+        <ProductDetail
+          product={selectedProduct}
+          type={selectedProductType}
+          onClose={handleCloseDetail}
+          onToggleFavorite={
+            selectedProductType === "exclusives"
+              ? toggleFavorite
+              : toggleFavoritePopular
+          }
+        />
+      )}
+
       <header className={styles.header}>
         <h1>Эксклюзивы Airbnb</h1>
         {searchQuery && (
@@ -230,7 +282,11 @@ export const Exclusive = () => {
       <section className={styles.exclusivesSection}>
         <div className={styles.exclusivesGrid}>
           {currentItems.map((item) => (
-            <div key={item.id} className={styles.exclusiveCard}>
+            <div
+              key={item.id}
+              className={styles.exclusiveCard}
+              onClick={() => handleProductClick(item, "exclusives")}
+            >
               <div className={styles.cardImage}>
                 <img
                   src={item.image}
@@ -249,7 +305,10 @@ export const Exclusive = () => {
                   className={`${styles.favoriteButton} ${
                     item.isFavorite ? styles.favorited : ""
                   }`}
-                  onClick={() => toggleFavorite(item.id)}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleFavorite(item.id)
+                  }}
                 >
                   {item.isFavorite ? "❤️" : "🤍"}
                 </button>
@@ -315,9 +374,14 @@ export const Exclusive = () => {
             </div>
           )}
         </div>
-        <div className={styles.popularGrid}>
+
+        <div className={styles.exclusivesGrid}>
           {currentPopularItems.map((item) => (
-            <div key={item.id} className={styles.popularCard}>
+            <div
+              key={item.id}
+              className={styles.exclusiveCard}
+              onClick={() => handleProductClick(item, "popular")}
+            >
               <div className={styles.cardImage}>
                 <img
                   src={item.image}
@@ -332,9 +396,20 @@ export const Exclusive = () => {
                   className={styles.imagePlaceholder}
                   style={{display: "none"}}
                 ></div>
+                <button
+                  className={`${styles.favoriteButton} ${
+                    item.isFavorite ? styles.favorited : ""
+                  }`}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    toggleFavoritePopular(item.id)
+                  }}
+                >
+                  {item.isFavorite ? "❤️" : "🤍"}
+                </button>
               </div>
               <div className={styles.cardContent}>
-                <h3 className={styles.cardTitle}>{item.title}</h3>
+                <h3>{item.title}</h3>
                 <div className={styles.priceRating}>
                   <span className={styles.price}>
                     {formatPrice(item.price, item.perGroup)}

@@ -9,21 +9,41 @@
   top: 0;
   z-index: 100;
   transition: all 0.3s ease;
+  height: 60px; // Фиксированная высота для предотвращения "дергания"
+  box-sizing: border-box;
 
   &.scrolled {
     padding: 10px 40px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+    .logoWrapper img {
+      height: 32px;
+    }
+
+    .navLink {
+      font-size: 13px;
+    }
+
+    .badge {
+      font-size: 8px;
+      padding: 1px 4px;
+    }
+
+    .searchCompact button {
+      font-size: 12px;
+      padding: 0 4px;
+    }
+
+    .rightIcons button {
+      padding: 6px;
+      font-size: 14px;
+    }
   }
 }
 
 .logoWrapper img {
   height: 40px;
   transition: all 0.3s ease;
-
-  .scrolled & {
-    height: 32px;
-  }
-
   cursor: pointer;
 }
 
@@ -52,6 +72,7 @@
 
   img {
     height: 22px;
+    transition: all 0.3s ease;
   }
 }
 
@@ -67,6 +88,7 @@
   padding: 2px 6px;
   border-radius: 12px;
   margin-left: 6px;
+  transition: all 0.3s ease;
 }
 
 /* --- Большая поисковая строка --- */
@@ -81,6 +103,8 @@
   border-radius: 40px;
   padding: 5px 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  height: 60px; // Фиксированная высота
+  box-sizing: border-box;
 
   opacity: 1;
   transform: translateY(0);
@@ -141,49 +165,55 @@
   padding: 6px 12px;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 20px;
+  flex: 1;
+  max-width: 400px;
+  height: 40px; // Фиксированная высота
+  box-sizing: border-box;
 
   opacity: 0;
+  visibility: hidden;
   transform: translateY(-10px);
   transition: all 0.3s ease;
 
   &.visible {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
   }
 
-  button {
-    background: none;
+  input {
     border: none;
+    outline: none;
+    flex: 1;
+    padding: 4px 8px;
     font-size: 14px;
-    color: #555;
-    cursor: pointer;
-    padding: 0 6px;
+    height: 100%;
+    background: transparent;
 
-    &:hover {
-      color: #000;
+    &::placeholder {
+      color: #999;
     }
   }
-  input {
-    border: 1px solid black;
-    border-radius: 15px;
+
+  .searchIcon {
+    background: #ff385c;
+    color: #fff;
+    border-radius: 50%;
+    padding: 6px;
+    margin-left: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
-}
-
-.dot {
-  width: 4px;
-  height: 4px;
-  background: #ccc;
-  border-radius: 50%;
-  margin: 0 6px;
-}
-
-.searchIcon {
-  background: #ff385c;
-  color: #fff;
-  font-size: 14px;
-  border-radius: 50%;
-  padding: 6px;
-  margin-left: 8px;
 }
 
 .rightIcons {
@@ -197,29 +227,17 @@
     padding: 8px;
     cursor: pointer;
     font-size: 16px;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
       background: #eee;
     }
   }
-}
-.header.scrolled .navLink {
-  font-size: 13px;
-}
-
-.header.scrolled .badge {
-  font-size: 8px;
-  padding: 1px 4px;
-}
-
-.header.scrolled .searchCompact button {
-  font-size: 12px;
-  padding: 0 4px;
-}
-
-.header.scrolled .rightIcons button {
-  padding: 6px;
-  font-size: 14px;
 }
 
 // burger menu
@@ -247,6 +265,7 @@
       cursor: pointer;
       font-size: 14px;
       transition: background 0.2s;
+
       &:hover {
         background: #f7f7f7;
       }
@@ -263,44 +282,4 @@
 .menuIcon {
   width: 18px;
   text-align: center;
-}
-
-// В Header.module.scss
-.searchCompact {
-  display: flex;
-  align-items: center;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 24px;
-  padding: 8px 16px;
-  margin: 0 20px;
-  transition: all 0.3s ease;
-
-  &.visible {
-    display: flex;
-  }
-
-  input {
-    border: none;
-    outline: none;
-    flex: 1;
-    padding: 4px 8px;
-    font-size: 14px;
-
-    &::placeholder {
-      color: #999;
-    }
-  }
-
-  .searchIcon {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-    font-size: 16px;
-
-    &:hover {
-      opacity: 0.8;
-    }
-  }
 }

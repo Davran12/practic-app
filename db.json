@@ -617,13 +617,13 @@
   ],
   "users": [
     {
-      "id": "5686",
+      "id": "06ab",
       "name": "Давран",
       "lastName": "Осмонов",
-      "age": "20",
+      "age": "23",
       "phoneNumber": "+996999997727",
       "email": "davranosmonov06@gmail.com",
-      "password": "davran13254",
+      "password": "12345678",
       "role": "admin"
     }
   ]

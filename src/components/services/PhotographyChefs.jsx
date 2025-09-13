@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react"
 import styles from "./PhotographyChefs.module.scss"
 import {useSearch} from "@/context/SearchContext"
+import {ProductDetail} from "@/components/ProductDetail/ProductDetail" // Импортируем компонент
 
 const PhotographyChefs = () => {
   const [photography, setPhotography] = useState([])
@@ -18,8 +19,38 @@ const PhotographyChefs = () => {
     chefMinPrice: "",
     chefMaxPrice: "",
   })
+  const [selectedProduct, setSelectedProduct] = useState(null) 
+  const [selectedProductType, setSelectedProductType] = useState(null)
 
   const {searchQuery} = useSearch()
+
+  // Функция для открытия детального просмотра
+  const handleProductClick = (product, type) => {
+    setSelectedProduct(product)
+    setSelectedProductType(type)
+  }
+
+  // Функция для закрытия детального просмотра
+  const handleCloseDetail = () => {
+    setSelectedProduct(null)
+    setSelectedProductType(null)
+  }
+
+  // Функция для переключения избранного из детального просмотра
+  const handleToggleFavoriteFromDetail = async (type, id) => {
+    await toggleFavorite(type, id) // Используем существующую функцию
+    // Обновляем выбранный продукт если он открыт
+    if (selectedProduct && selectedProduct.id === id) {
+      let updatedProduct
+      if (type === "photography") {
+        updatedProduct = photography.find((item) => item.id === id)
+      } else {
+        updatedProduct = chefs.find((item) => item.id === id)
+      }
+      setSelectedProduct(updatedProduct)
+    }
+  }
+
   // Загрузка данных
   useEffect(() => {
     const fetchData = async () => {
@@ -180,6 +211,16 @@ const PhotographyChefs = () => {
 
   return (
     <div className={styles.container}>
+      {/* Детальный просмотр */}
+      {selectedProduct && (
+        <ProductDetail
+          product={selectedProduct}
+          type={selectedProductType}
+          onClose={handleCloseDetail}
+          onToggleFavorite={handleToggleFavoriteFromDetail}
+        />
+      )}
+
       {/* Заголовок с информацией о поиске */}
       {searchQuery && (
         <div className={styles.searchHeader}>
@@ -222,7 +263,11 @@ const PhotographyChefs = () => {
 
         <div className={styles.cardsGrid}>
           {currentPhotos.map((item) => (
-            <div key={item.id} className={styles.card}>
+            <div
+              key={item.id}
+              className={styles.card}
+              onClick={() => handleProductClick(item, "photography")} // Добавляем клик
+            >
               <div className={styles.cardImage}>
                 <img
                   src={item.image}
@@ -241,7 +286,10 @@ const PhotographyChefs = () => {
                   className={`${styles.favoriteButton} ${
                     item.isFavorite ? styles.favorited : ""
                   }`}
-                  onClick={() => toggleFavorite("photography", item.id)}
+                  onClick={(e) => {
+                    e.stopPropagation() // Предотвращаем всплытие клика
+                    toggleFavorite("photography", item.id)
+                  }}
                 >
                   {item.isFavorite ? "❤️" : "🤍"}
                 </button>
@@ -336,7 +384,11 @@ const PhotographyChefs = () => {
 
         <div className={styles.cardsGrid}>
           {currentChefs.map((item) => (
-            <div key={item.id} className={styles.card}>
+            <div
+              key={item.id}
+              className={styles.card}
+              onClick={() => handleProductClick(item, "chefs")} // Добавляем клик
+            >
               <div className={styles.cardImage}>
                 <img
                   src={item.image}
@@ -355,7 +407,10 @@ const PhotographyChefs = () => {
                   className={`${styles.favoriteButton} ${
                     item.isFavorite ? styles.favorited : ""
                   }`}
-                  onClick={() => toggleFavorite("chefs", item.id)}
+                  onClick={(e) => {
+                    e.stopPropagation() // Предотвращаем всплытие клика
+                    toggleFavorite("chefs", item.id)
+                  }}
                 >
                   {item.isFavorite ? "❤️" : "🤍"}
                 </button>

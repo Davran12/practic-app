@@ -11,6 +11,7 @@ import {Exclusive} from "./components/ExclusiveCard/Exclusive"
 import PhotographyChefs from "./components/services/PhotographyChefs"
 import Favourite from "./components/favourite/Favourite"
 import {SearchProvider} from "./context/SearchContext"
+import Profile from "./components/Profile/Profile"
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
                 <Route element={<PhotographyChefs />} path="/services" />
                 <Route element={<Favourite />} path="/favourite" />
                 <Route element={<p>Корзина</p>} path="/cart" />
+                <Route element={<Profile />} path="/profile" />
               </Route>
 
               <Route element={<PrivateRoute allowedRoles={["admin"]} />}>

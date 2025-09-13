@@ -417,24 +417,98 @@
   color: #333;
 }
 
-.popularGrid {
+.exclusivesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
-.popularCard {
+.exclusiveCard {
   background: white;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-2px);
   }
 }
+
+.cardImage {
+  position: relative;
+  width: 100%;
+  height: 200px;
+
+  .realImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .imagePlaceholder {
+    width: 100%;
+    height: 100%;
+    background: #f0f0f0;
+    display: none;
+  }
+}
+
+.favoriteButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  font-size: 16px;
+
+  &.favorited {
+    color: #ff385c;
+  }
+}
+
+.cardContent {
+  padding: 16px;
+}
+
+.cardContent h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #333;
+  line-height: 1.3;
+}
+
+.location {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 8px 0;
+}
+
+.priceRating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.rating {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
 .searchInfo {
   margin-top: 10px;
   font-size: 16px;

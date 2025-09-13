@@ -43,16 +43,32 @@ export function Header() {
   const location = useLocation()
   const {user} = useSelector((state) => state.auth)
   const [isScrolled, setIsScrolled] = useState(false)
-  const {updateSearchQuery, searchQuery} = useSearch() // Используем хук
+  const {updateSearchQuery, searchQuery} = useSearch()
 
   // Burger menu state
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const menuRef = useRef(null)
+  const headerRef = useRef(null)
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50)
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
+    }
+
+    // Используем requestAnimationFrame для плавности
+    let ticking = false
+    const scrollHandler = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+
+    window.addEventListener("scroll", scrollHandler, {passive: true})
+    return () => window.removeEventListener("scroll", scrollHandler)
   }, [])
 
   // закрытие по клику вне меню
@@ -76,7 +92,6 @@ export function Header() {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
-    // Можно добавить дополнительную логику при отправке поиска
     console.log("Search submitted:", searchQuery)
   }
 
@@ -96,7 +111,7 @@ export function Header() {
         console.log("Переход к сообщениям")
         break
       case "profile":
-        console.log("Переход к профилю")
+        navigate("/profile")
         break
       case "settings":
         console.log("Переход к настройкам")
@@ -123,6 +138,7 @@ export function Header() {
   return (
     <>
       <header
+        ref={headerRef}
         className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}
       >
         <div className={styles.logoWrapper} onClick={() => navigate("/")}>

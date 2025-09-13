@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react"
 import styles from "./Card.module.scss"
 import {useSearch} from "@/context/SearchContext"
+import {ProductDetail} from "@/components/ProductDetail/ProductDetail" // Импортируем компонент
 
 export const Card = () => {
   const [accommodations, setAccommodations] = useState([])
@@ -16,8 +17,32 @@ export const Card = () => {
     minRating: "",
     type: "",
   })
+  const [selectedProduct, setSelectedProduct] = useState(null) // Для детального просмотра
+  const [selectedProductType, setSelectedProductType] = useState(null) // Тип продукта
 
   const {searchQuery} = useSearch() // Получаем поисковый запрос
+
+  // Функция для открытия детального просмотра
+  const handleProductClick = (product, type = "accommodations") => {
+    setSelectedProduct(product)
+    setSelectedProductType(type)
+  }
+
+  // Функция для закрытия детального просмотра
+  const handleCloseDetail = () => {
+    setSelectedProduct(null)
+    setSelectedProductType(null)
+  }
+
+  // Функция для переключения избранного из детального просмотра
+  const handleToggleFavoriteFromDetail = async (type, id) => {
+    await toggleFavorite(id) // Используем существующую функцию
+    // Обновляем выбранный продукт если он открыт
+    if (selectedProduct && selectedProduct.id === id) {
+      const updatedProduct = accommodations.find((item) => item.id === id)
+      setSelectedProduct(updatedProduct)
+    }
+  }
 
   // Функция для обновления избранного
   const updateFavorite = async (id, isFavorite) => {
@@ -218,6 +243,16 @@ export const Card = () => {
 
   return (
     <div className={styles.container}>
+      {/* Детальный просмотр */}
+      {selectedProduct && (
+        <ProductDetail
+          product={selectedProduct}
+          type={selectedProductType}
+          onClose={handleCloseDetail}
+          onToggleFavorite={handleToggleFavoriteFromDetail}
+        />
+      )}
+
       <header className={styles.header}>
         <h1>Проживание по всему миру</h1>
         {searchQuery && (
@@ -305,7 +340,11 @@ export const Card = () => {
       {/* Карточки */}
       <div className={styles.accommodationsGrid}>
         {currentItems.map((item) => (
-          <div key={item.id} className={styles.accommodationCard}>
+          <div
+            key={item.id}
+            className={styles.accommodationCard}
+            onClick={() => handleProductClick(item, "accommodations")} // Добавляем клик
+          >
             <div className={styles.cardImage}>
               <img
                 src={item.image}
@@ -326,7 +365,10 @@ export const Card = () => {
                 className={`${styles.favoriteButton} ${
                   item.isFavorite ? styles.favorited : ""
                 }`}
-                onClick={() => toggleFavorite(item.id)}
+                onClick={(e) => {
+                  e.stopPropagation() // Предотвращаем всплытие клика
+                  toggleFavorite(item.id)
+                }}
                 aria-label={
                   item.isFavorite
                     ? "Удалить из избранного"
