@@ -1,4 +1,10 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom"
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useNavigate,
+  Navigate,
+} from "react-router-dom"
 import "./styles/global.scss"
 import {MainLayout} from "./layouts/MainLayout"
 import {PublicRoute} from "./routes/PublicRoute"
@@ -8,10 +14,14 @@ import {store} from "./store/store"
 import {Card} from "./components/Card"
 import {Auth} from "./pages/Auth"
 import {Exclusive} from "./components/ExclusiveCard/Exclusive"
-import PhotographyChefs from "./components/services/PhotographyChefs"
-import Favourite from "./components/favourite/Favourite"
+import PhotographyChefs from "./components/Services/PhotographyChefs"
+import Favourite from "./components/Favourite/Favourite"
 import {SearchProvider} from "./context/SearchContext"
 import Profile from "./components/Profile/Profile"
+import AdminPanel from "./components/Admin/AdminPanel"
+import AccommodationsAdmin from "./components/Admin/AccommodationsAdmin"
+import ExperiencesAdmin from "./components/Admin/ExperiencesAdmin"
+import ServicesAdmin from "./components/Admin/ServicesAdmin"
 
 function App() {
   return (
@@ -25,20 +35,32 @@ function App() {
             </Route>
 
             <Route element={<MainLayout />}>
-              {/* Приватные роуты  */}
+              {/* Приватные роуты для пользователей и админов */}
               <Route
                 element={<PrivateRoute allowedRoles={["user", "admin"]} />}
               >
-                <Route element={<Card />} path="/" />
-                <Route element={<Exclusive />} path="/impressions" />
-                <Route element={<PhotographyChefs />} path="/services" />
-                <Route element={<Favourite />} path="/favourite" />
-                <Route element={<p>Корзина</p>} path="/cart" />
-                <Route element={<Profile />} path="/profile" />
+                <Route path="/" element={<Card />} />
+                <Route path="/impressions" element={<Exclusive />} />
+                <Route path="/services" element={<PhotographyChefs />} />
+                <Route path="/favourite" element={<Favourite />} />
+                <Route path="/profile" element={<Profile />} />
               </Route>
 
+              {/* Приватные роуты только для админов */}
               <Route element={<PrivateRoute allowedRoles={["admin"]} />}>
-                <Route element={<p>страница админа</p>} path="/admin" />
+                {/* Группируем админские роуты */}
+                <Route path="/admin" element={<AdminPanel />}>
+                  <Route
+                    index
+                    element={<Navigate to="accommodations" replace />}
+                  />
+                  <Route
+                    path="accommodations"
+                    element={<AccommodationsAdmin />}
+                  />
+                  <Route path="experiences" element={<ExperiencesAdmin />} />
+                  <Route path="services" element={<ServicesAdmin />} />
+                </Route>
               </Route>
             </Route>
 

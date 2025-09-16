@@ -47,8 +47,6 @@ export const Card = () => {
   // Функция для обновления избранного
   const updateFavorite = async (id, isFavorite) => {
     try {
-      console.log("Updating favorite:", id, isFavorite)
-
       const response = await fetch(
         `http://localhost:3001/accommodations/${id}`,
         {
@@ -65,7 +63,6 @@ export const Card = () => {
       }
 
       const updatedItem = await response.json()
-      console.log("Server response:", updatedItem)
 
       return updatedItem
     } catch (error) {
@@ -81,8 +78,6 @@ export const Card = () => {
         const response = await fetch("http://localhost:3001/accommodations")
         if (!response.ok) throw new Error("Не удалось загрузить данные")
         const data = await response.json()
-
-        console.log("Loaded data:", data)
 
         // Гарантируем что у каждого элемента есть isFavorite
         const dataWithFavorite = data.map((item) => ({
@@ -115,14 +110,6 @@ export const Card = () => {
       }
 
       const newFavoriteStatus = !currentItem.isFavorite
-      console.log(
-        "Toggling favorite for item:",
-        id,
-        "from",
-        currentItem.isFavorite,
-        "to",
-        newFavoriteStatus
-      )
 
       // Сначала обновляем локальное состояние
       setAccommodations((prev) =>
@@ -140,7 +127,6 @@ export const Card = () => {
       // Затем пытаемся обновить на сервере
       try {
         await updateFavorite(id, newFavoriteStatus)
-        console.log("Favorite updated successfully on server")
       } catch (serverError) {
         console.error("Failed to update on server, reverting UI")
         // Если серверный запрос не удался, откатываем UI

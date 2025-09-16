@@ -22,17 +22,17 @@ const pages = [
 ]
 
 const burgerMenuItems = [
-  {title: "Вишлисты", icon: "❤️", action: "wishlists"},
-  {title: "Поездки", icon: "🏠", action: "trips"},
-  {title: "Сообщения", icon: "💬", action: "messages"},
-  {title: "Профиль", icon: "👤", action: "profile"},
+  {title: "Вишлисты", icon: "❤️", action: "wishlists", link: "/favourite"},
+  {title: "Поездки", icon: "✈️", action: "trips", disabled: true},
+  {title: "Сообщения", icon: "💬", action: "messages", disabled: true},
+  {title: "Профиль", icon: "👤", action: "profile", link: "/profile"},
   "divider",
-  {title: "Настройки аккаунта", icon: "⚙️", action: "settings"},
-  {title: "Языки и валюта", icon: "🌐", action: "language"},
-  {title: "Центр помощи", icon: "❓", action: "help"},
+  {title: "Настройки аккаунта", icon: "⚙️", action: "settings", disabled: true},
+  {title: "Языки и валюта", icon: "🌐", action: "language", disabled: true},
+  {title: "Центр помощи", icon: "❓", action: "help", disabled: true},
   "divider",
-  {title: "Пригласите хозяина", action: "invite-host"},
-  {title: "Найти второго хозяина", action: "find-cohost"},
+  {title: "Пригласите хозяина", action: "invite-host", disabled: true},
+  {title: "Найти второго хозяина", action: "find-cohost", disabled: true},
   "divider",
   {title: "Выйти", action: "logout"},
 ]
@@ -44,6 +44,7 @@ export function Header() {
   const {user} = useSelector((state) => state.auth)
   const [isScrolled, setIsScrolled] = useState(false)
   const {updateSearchQuery, searchQuery} = useSearch()
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
 
   // Burger menu state
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -51,11 +52,14 @@ export function Header() {
   const headerRef = useRef(null)
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
     }
 
-    // Используем requestAnimationFrame для плавности
     let ticking = false
     const scrollHandler = () => {
       if (!ticking) {
@@ -67,8 +71,13 @@ export function Header() {
       }
     }
 
+    window.addEventListener("resize", handleResize)
     window.addEventListener("scroll", scrollHandler, {passive: true})
-    return () => window.removeEventListener("scroll", scrollHandler)
+
+    return () => {
+      window.removeEventListener("resize", handleResize)
+      window.removeEventListener("scroll", scrollHandler)
+    }
   }, [])
 
   // закрытие по клику вне меню
@@ -92,10 +101,11 @@ export function Header() {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
-    console.log("Search submitted:", searchQuery)
   }
 
-  const handleMenuItemClick = (action) => {
+  const handleMenuItemClick = (action, link, disabled) => {
+    if (disabled) return
+
     setIsMenuOpen(false)
     switch (action) {
       case "wishlists":
@@ -104,36 +114,22 @@ export function Header() {
       case "logout":
         dispatch(logout())
         break
-      case "trips":
-        console.log("Переход к поездкам")
-        break
-      case "messages":
-        console.log("Переход к сообщениям")
-        break
       case "profile":
         navigate("/profile")
         break
-      case "settings":
-        console.log("Переход к настройкам")
-        break
-      case "language":
-        console.log("Переход к языкам")
-        break
-      case "help":
-        console.log("Переход в центр помощи")
-        break
-      case "invite-host":
-        console.log("Пригласить хозяина")
-        break
-      case "find-cohost":
-        console.log("Найти второго хозяина")
+      case "admin":
+        navigate("/admin")
         break
       default:
+        if (link) {
+          navigate(link)
+        }
         break
     }
   }
 
   const isHome = location.pathname === "/"
+  const isAdmin = user?.role === "admin"
 
   return (
     <>
@@ -145,21 +141,28 @@ export function Header() {
           <img src={logo} alt="airbnb-logo" />
         </div>
 
-        <nav className={styles.nav}>
-          {pages.map((page, index) => (
-            <NavLink
-              key={index}
-              to={page.link}
-              className={({isActive}) =>
-                isActive ? `${styles.navLink} ${styles.active}` : styles.navLink
-              }
-            >
-              <img src={page.icon} alt={page.title} />
-              <span>{page.title}</span>
-              {page.badge && <span className={styles.badge}>{page.badge}</span>}
-            </NavLink>
-          ))}
-        </nav>
+        {/* Навигация - скрывается на мобильных */}
+        {!isMobile && (
+          <nav className={styles.nav}>
+            {pages.map((page, index) => (
+              <NavLink
+                key={index}
+                to={page.link}
+                className={({isActive}) =>
+                  isActive
+                    ? `${styles.navLink} ${styles.active}`
+                    : styles.navLink
+                }
+              >
+                <img src={page.icon} alt={page.title} />
+                <span>{page.title}</span>
+                {page.badge && (
+                  <span className={styles.badge}>{page.badge}</span>
+                )}
+              </NavLink>
+            ))}
+          </nav>
+        )}
 
         <form
           className={`${styles.searchCompact} ${
@@ -187,20 +190,72 @@ export function Header() {
         {isMenuOpen && (
           <div className={styles.burgerMenu} ref={menuRef}>
             <ul>
+              {/* Основные страницы показываются только в мобильном меню */}
+              {isMobile && (
+                <>
+                  <li
+                    onClick={() => {
+                      navigate("/")
+                      setIsMenuOpen(false)
+                    }}
+                  >
+                    <span className={styles.menuIcon}>🏠</span>
+                    Жильё
+                  </li>
+                  <li
+                    onClick={() => {
+                      navigate("/impressions")
+                      setIsMenuOpen(false)
+                    }}
+                  >
+                    <span className={styles.menuIcon}>🎈</span>
+                    Впечатления
+                    <span className={styles.badge}>НОВОЕ</span>
+                  </li>
+                  <li
+                    onClick={() => {
+                      navigate("/services")
+                      setIsMenuOpen(false)
+                    }}
+                  >
+                    <span className={styles.menuIcon}>🔔</span>
+                    Услуги
+                    <span className={styles.badge}>НОВОЕ</span>
+                  </li>
+                  <hr />
+                </>
+              )}
+
               {burgerMenuItems.map((item, idx) =>
                 item === "divider" ? (
                   <hr key={idx} />
                 ) : (
                   <li
                     key={idx}
-                    onClick={() => handleMenuItemClick(item.action)}
+                    className={item.disabled ? styles.disabled : ""}
+                    onClick={() =>
+                      handleMenuItemClick(item.action, item.link, item.disabled)
+                    }
                   >
-                    {item.icon && (
-                      <span className={styles.menuIcon}>{item.icon}</span>
-                    )}
+                    <span className={styles.menuIcon}>{item.icon}</span>
                     {item.title}
+                    {item.disabled && (
+                      <span className={styles.comingSoon}>Скоро</span>
+                    )}
                   </li>
                 )
+              )}
+
+              {/* Добавляем пункт меню Admin для администраторов */}
+              {isAdmin && (
+                <>
+                  <hr />
+                  <li onClick={() => handleMenuItemClick("admin", "/admin")}>
+                    <span className={styles.menuIcon}>⚙️</span>
+                    Панель администратора
+                    <span className={styles.adminBadge}>ADMIN</span>
+                  </li>
+                </>
               )}
             </ul>
           </div>

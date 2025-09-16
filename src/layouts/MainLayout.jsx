@@ -62,9 +62,6 @@ export function MainLayout() {
               <li>
                 <a href="#">Бесплатный урок приема гостей</a>
               </li>
-              <li>
-                <a href="#">Найти второго хозяина</a>
-              </li>
             </ul>
           </div>
 
