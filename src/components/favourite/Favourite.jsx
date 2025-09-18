@@ -1,7 +1,7 @@
 // components/Favourite/Favourite.jsx
 import React, {useState, useEffect} from "react"
 import styles from "./Favourite.module.scss"
-import {ProductDetail} from "@/components/ProductDetail/ProductDetail" // Импортируем компонент
+import {ProductDetail} from "@/components/ProductDetail/ProductDetail" 
 import {useNavigate} from "react-router-dom"
 
 const Favourite = () => {
@@ -164,7 +164,7 @@ const Favourite = () => {
               <div
                 key={`${item.type}-${item.id}`}
                 className={styles.favoriteCard}
-                onClick={() => handleProductClick(item, item.type)} // Добавляем клик
+                onClick={() => handleProductClick(item, item.type)}
               >
                 <div className={styles.cardImage}>
                   <img

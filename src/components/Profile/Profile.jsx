@@ -1,4 +1,3 @@
-// components/Profile/Profile.jsx
 import React, {useState, useEffect} from "react"
 import styles from "./Profile.module.scss"
 import {useSelector} from "react-redux"

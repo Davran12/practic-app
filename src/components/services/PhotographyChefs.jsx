@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import styles from "./PhotographyChefs.module.scss"
 import {useSearch} from "@/context/SearchContext"
-import {ProductDetail} from "@/components/ProductDetail/ProductDetail" // Импортируем компонент
+import {ProductDetail} from "@/components/ProductDetail/ProductDetail"
 
 const PhotographyChefs = () => {
   const [photography, setPhotography] = useState([])
@@ -19,7 +19,7 @@ const PhotographyChefs = () => {
     chefMinPrice: "",
     chefMaxPrice: "",
   })
-  const [selectedProduct, setSelectedProduct] = useState(null) 
+  const [selectedProduct, setSelectedProduct] = useState(null)
   const [selectedProductType, setSelectedProductType] = useState(null)
 
   const {searchQuery} = useSearch()
@@ -38,7 +38,7 @@ const PhotographyChefs = () => {
 
   // Функция для переключения избранного из детального просмотра
   const handleToggleFavoriteFromDetail = async (type, id) => {
-    await toggleFavorite(type, id) // Используем существующую функцию
+    await toggleFavorite(type, id)
     // Обновляем выбранный продукт если он открыт
     if (selectedProduct && selectedProduct.id === id) {
       let updatedProduct
@@ -387,7 +387,7 @@ const PhotographyChefs = () => {
             <div
               key={item.id}
               className={styles.card}
-              onClick={() => handleProductClick(item, "chefs")} // Добавляем клик
+              onClick={() => handleProductClick(item, "chefs")}
             >
               <div className={styles.cardImage}>
                 <img

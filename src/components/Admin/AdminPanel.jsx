@@ -33,7 +33,7 @@ const AdminPanel = () => {
       </nav>
 
       <div className={styles.content}>
-        <Outlet /> {/* Это место, где будут отображаться дочерние компоненты */}
+        <Outlet /> {/* место для отображение дочерних компонентов */}
       </div>
     </div>
   )

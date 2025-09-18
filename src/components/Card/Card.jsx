@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import styles from "./Card.module.scss"
 import {useSearch} from "@/context/SearchContext"
-import {ProductDetail} from "@/components/ProductDetail/ProductDetail" // Импортируем компонент
+import {ProductDetail} from "@/components/ProductDetail/ProductDetail"
 
 export const Card = () => {
   const [accommodations, setAccommodations] = useState([])
@@ -17,10 +17,10 @@ export const Card = () => {
     minRating: "",
     type: "",
   })
-  const [selectedProduct, setSelectedProduct] = useState(null) // Для детального просмотра
-  const [selectedProductType, setSelectedProductType] = useState(null) // Тип продукта
+  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [selectedProductType, setSelectedProductType] = useState(null)
 
-  const {searchQuery} = useSearch() // Получаем поисковый запрос
+  const {searchQuery} = useSearch()
 
   // Функция для открытия детального просмотра
   const handleProductClick = (product, type = "accommodations") => {
@@ -36,7 +36,7 @@ export const Card = () => {
 
   // Функция для переключения избранного из детального просмотра
   const handleToggleFavoriteFromDetail = async (type, id) => {
-    await toggleFavorite(id) // Используем существующую функцию
+    await toggleFavorite(id)
     // Обновляем выбранный продукт если он открыт
     if (selectedProduct && selectedProduct.id === id) {
       const updatedProduct = accommodations.find((item) => item.id === id)
@@ -133,14 +133,14 @@ export const Card = () => {
         setAccommodations((prev) =>
           prev.map((item) =>
             item.id === id
-              ? {...item, isFavorite: currentItem.isFavorite} // Возвращаем старое значение
+              ? {...item, isFavorite: currentItem.isFavorite}
               : item
           )
         )
         setFilteredAccommodations((prev) =>
           prev.map((item) =>
             item.id === id
-              ? {...item, isFavorite: currentItem.isFavorite} // Возвращаем старое значение
+              ? {...item, isFavorite: currentItem.isFavorite}
               : item
           )
         )
@@ -156,46 +156,53 @@ export const Card = () => {
 
     // Глобальный поиск по всем полям
     if (searchQuery) {
+      const query = searchQuery.toLowerCase()
       result = result.filter(
         (item) =>
-          item.title?.toLowerCase().includes(searchQuery) ||
-          item.city?.toLowerCase().includes(searchQuery) ||
-          item.type?.toLowerCase().includes(searchQuery) ||
-          item.location?.toLowerCase().includes(searchQuery) ||
-          item.price?.toString().includes(searchQuery)
+          (item.title && item.title.toLowerCase().includes(query)) ||
+          (item.city && item.city.toLowerCase().includes(query)) ||
+          (item.type && item.type.toLowerCase().includes(query)) ||
+          (item.location && item.location.toLowerCase().includes(query)) ||
+          (item.price && item.price.toString().includes(searchQuery))
       )
     }
 
     // Обычные фильтры
     if (filters.city) {
-      result = result.filter((item) =>
-        item.city.toLowerCase().includes(filters.city.toLowerCase())
+      const cityFilter = filters.city.toLowerCase()
+      result = result.filter(
+        (item) => item.city && item.city.toLowerCase().includes(cityFilter)
       )
     }
 
     if (filters.minPrice) {
-      result = result.filter((item) => item.price >= parseInt(filters.minPrice))
+      result = result.filter(
+        (item) => item.price && item.price >= parseInt(filters.minPrice)
+      )
     }
 
     if (filters.maxPrice) {
-      result = result.filter((item) => item.price <= parseInt(filters.maxPrice))
+      result = result.filter(
+        (item) => item.price && item.price <= parseInt(filters.maxPrice)
+      )
     }
 
     if (filters.minRating) {
       result = result.filter(
-        (item) => item.rating >= parseFloat(filters.minRating)
+        (item) => item.rating && item.rating >= parseFloat(filters.minRating)
       )
     }
 
     if (filters.type) {
-      result = result.filter((item) =>
-        item.type.toLowerCase().includes(filters.type.toLowerCase())
+      const typeFilter = filters.type.toLowerCase()
+      result = result.filter(
+        (item) => item.type && item.type.toLowerCase().includes(typeFilter)
       )
     }
 
     setFilteredAccommodations(result)
     setCurrentPage(1)
-  }, [filters, accommodations, searchQuery]) // Добавляем searchQuery в зависимости
+  }, [filters, accommodations, searchQuery])
 
   // Пагинация
   const indexOfLastItem = currentPage * itemsPerPage
@@ -220,9 +227,22 @@ export const Card = () => {
     }))
   }
 
-  // Получаем уникальные города для фильтра
-  const uniqueCities = [...new Set(accommodations.map((item) => item.city))]
-  const uniqueTypes = [...new Set(accommodations.map((item) => item.type))]
+  // Получаем уникальные города для фильтра (исключаем undefined/null)
+  const uniqueCities = [
+    ...new Set(
+      accommodations
+        .map((item) => item.city)
+        .filter((city) => city != null && city !== "")
+    ),
+  ]
+
+  const uniqueTypes = [
+    ...new Set(
+      accommodations
+        .map((item) => item.type)
+        .filter((type) => type != null && type !== "")
+    ),
+  ]
 
   if (loading) return <div className={styles.loading}>Загрузка...</div>
   if (error) return <div className={styles.error}>Ошибка: {error}</div>
@@ -329,7 +349,7 @@ export const Card = () => {
           <div
             key={item.id}
             className={styles.accommodationCard}
-            onClick={() => handleProductClick(item, "accommodations")} // Добавляем клик
+            onClick={() => handleProductClick(item, "accommodations")}
           >
             <div className={styles.cardImage}>
               <img
@@ -352,7 +372,7 @@ export const Card = () => {
                   item.isFavorite ? styles.favorited : ""
                 }`}
                 onClick={(e) => {
-                  e.stopPropagation() // Предотвращаем всплытие клика
+                  e.stopPropagation()
                   toggleFavorite(item.id)
                 }}
                 aria-label={
