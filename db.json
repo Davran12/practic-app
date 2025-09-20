@@ -59,7 +59,8 @@
       "location": "Париж",
       "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
       "rating": "4.8",
-      "id": "5"
+      "id": "5",
+      "isFavorite": false
     },
     {
       "id": "6",
@@ -632,6 +633,16 @@
       "email": "admin@gmail.com",
       "password": "12345678",
       "role": "admin"
+    },
+    {
+      "id": "03ba",
+      "name": "Давран",
+      "lastName": "Осмонов",
+      "age": "25",
+      "phoneNumber": "+996999997727",
+      "email": "davranosmonov06@gmail.com",
+      "password": "12345678",
+      "role": "user"
     }
   ]
 }
